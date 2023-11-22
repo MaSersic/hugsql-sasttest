@@ -1,5 +1,6 @@
 name: Lint, Test, Build
 on:
+  workflow_dispatch:
   pull_request:
   push:
 
@@ -61,7 +62,10 @@ jobs:
 
       - name: Dependencies
         run: lein deps
-
+      
+      - name: Scan
+        uses: clj-holmes/clj-holmes-action@main
+  
       - name: Test
         working-directory: ./hugsql-core
         run: lein test-all
